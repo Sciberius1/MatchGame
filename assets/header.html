@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <style>
+        body {
+            background-image: url('./images/backgrounds/a-rainbow.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+        }
+        header {
+            width: 100%;
+            color:orangered;
+            position: absolute;
+            top: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            font-family: "Copperplate Gothic", sans-serif;
+            font-size: 16pt;
+        }
+        .header-title {
+            margin-bottom: 10px;
+        }
+        .header-info {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-title">Animal Match-Up by Team Six</div>
+        <div class="header-info">
+            <div>Player Name: <span id="playerName"></span></div>
+            <div>Current Time: <span id="timeTaken"></span></div>
+            <script>
+            let timerInterval;
+            let seconds = 0;
+
+            function updateTime() {
+                const minutes = Math.floor(seconds / 60);
+                const displaySeconds = seconds % 60;
+                document.getElementById('timeTaken').textContent = `${minutes}:${displaySeconds < 10 ? '0' : ''}${displaySeconds}`;
+            }
+
+            function startTimer() {
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    updateTime();
+                }, 1000);
+            }
+
+            function stopTimer() {
+                clearInterval(timerInterval);
+            }
+
+            window.addEventListener('startTimer', startTimer);
+            window.addEventListener('stopTimer', stopTimer);
+            </script>
+        </div>
+    </header>
+    <script>
+        document.getElementById('playerName').textContent = localStorage.getItem('playerName') || 'Unknown';
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Play Sidebar</title>
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const playerName = localStorage.getItem('playerName');
+        const backgroundImage = localStorage.getItem('backgroundImage');
+        const cardBackImage = localStorage.getItem('cardBackImage');
+        const fastestTime = localStorage.getItem('fastestTime');
+        const fastestPlayer = localStorage.getItem('fastestPlayer');
+
+        if (playerName) {
+            document.querySelector('.menu-item').textContent = `Player Name: ${playerName || 'Player 1'}`;
+        }
+
+        if (backgroundImage) {
+            document.body.style.backgroundImage = `url(${backgroundImage || './images/backgrounds/Landscape.png'})`;
+        }
+
+        if (cardBackImage) {
+            document.documentElement.style.setProperty('--card-back-image', `url(${cardBackImage || './images/cardBacks/baby_orangutan.png'})`);
+        }
+    });
+</script>
+
+<body>
+    <div class="sidebar">
+        <ul class="menu">
+        <!-- display playerName -->
+            <ul class="menu-item">Player Name: <span id="player-name"></span></ul>
+        <ul class="menu-item">
+            <button id="change-name-button">Change Player Name</button>
+        </ul>
+        <!-- <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let playerName = localStorage.getItem('playerName');
+                if (!playerName) {
+                    playerName = 'Player 1';
+                    localStorage.setItem('playerName', playerName);
+                }
+                const playerNameElement = document.getElementById('player-name');
+                if (playerNameElement) {
+                    playerNameElement.textContent = playerName;
+                }
+
+                document.getElementById('change-name-button').addEventListener('click', function() {
+                    const newName = prompt('Enter new player name:');
+                    if (newName) {
+                        localStorage.setItem('playerName', newName);
+                        document.getElementById('player-name').textContent = newName;
+                        location.reload();
+                    }
+                });
+            });
+        </script> -->
+
+        <!-- display backgroundImage -->
+        <ul class="menu-item">
+            <div>
+                <img id="background-preview" src="./images/backgrounds/Landscape.png" alt="Background Preview" style="width: 100px; height: 100px;">
+                <button id="change-background-button">Change Background Image</button>
+            </div>
+        </ul>
+        <script>
+            // document.addEventListener('DOMContentLoaded', function() {
+            //     const backgroundImage = localStorage.getItem('backgroundImage');
+            //     const backgroundPreview = document.getElementById('background-preview');
+                
+            //     if (backgroundImage) {
+            //         backgroundPreview.src = backgroundImage;
+            //     }
+
+            //     document.getElementById('change-background-button').addEventListener('click', function() {
+            //         const newBackground = prompt('Enter new background image URL:');
+            //         if (newBackground) {
+            //             localStorage.setItem('backgroundImage', newBackground);
+            //             backgroundPreview.src = newBackground;
+            //             document.body.style.backgroundImage = `url(${newBackground})`;
+            //         }
+            //     });
+            // });
+        </script>
+
+        <!-- display cardBackImage -->
+        <ul class="menu-item">
+            <div>
+                <img id="card-back-preview" src="./images/cardBacks/baby_orangutan.png" alt="Card Back Preview" style="width: 100px; height: 100px;">
+                <button id="change-card-back-button">Change Card Back Image</button>
+            </div>
+        </ul>
+        <!-- <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const cardBackImage = localStorage.getItem('cardBackImage');
+                const cardBackPreview = document.getElementById('card-back-preview');
+                
+                if (cardBackImage) {
+                    cardBackPreview.src = cardBackImage;
+                }
+
+                document.getElementById('change-card-back-button').addEventListener('click', function() {
+                    const newCardBack = prompt('Enter new card back image URL:');
+                    if (newCardBack) {
+                        localStorage.setItem('cardBackImage', newCardBack);
+                        cardBackPreview.src = newCardBack;
+                        document.documentElement.style.setProperty('--card-back-image', `url(${newCardBack})`);
+                    }
+                });
+            });
+        </script> -->
+
+        <!-- display fastestTime -->
+        <ul class="menu-item" id="fastest-time-display"></ul>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const playerName = localStorage.getItem('playerName') || 'Player 1';
+            const fastestPlayer = localStorage.getItem('fastestPlayer') || 'Player 1';
+            const fastestTime = localStorage.getItem('fastestTime');
+            const fastestTimeDisplay = document.getElementById('fastest-time-display');
+
+            if (fastestTime) {
+                const minutes = Math.floor(fastestTime / 60);
+                const seconds = fastestTime % 60;
+                fastestTimeDisplay.textContent = `${fastestPlayer} has the record at ${minutes} minutes and ${seconds} seconds.`;
+            } else {
+                fastestTimeDisplay.textContent = 'Set a new record to start off the day.';
+            }
+            });
+        </script>
+
+        <!-- display start over button -->
+        <ul class="menu-item">
+            <button id="reset-record-button">Reset Record</button>
+        </ul>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('reset-record-button').addEventListener('click', function() {
+                    localStorage.removeItem('fastestTime');
+                    localStorage.removeItem('fastestPlayer');
+                    location.reload();
+                });
+            });
+        </script>
+        </ul>
+    </div>
+    <script>
+    // window.addEventListener('message', function(event) {
+    //     if (event.data === 'victory') {
+    //     setTimeout(function() {
+    //         location.reload();
+    //     }, 5000);
+    //     }
+    // });
+    </script>
+</body>
+</html>
